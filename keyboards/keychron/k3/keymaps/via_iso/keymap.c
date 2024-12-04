@@ -33,8 +33,6 @@ enum custom_keycodes {
 #define KC_FLXP LGUI(KC_E)          // Windows file explorer
 #define KC_SNIP LGUI(LSFT(KC_S))    // Windows snip tool
 
-static uint8_t previous_rgb_mode = RGB_MATRIX_NONE;
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /*  First base layout
