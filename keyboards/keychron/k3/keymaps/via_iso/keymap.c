@@ -143,17 +143,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-// no matter what I do, the LEDS keep flickering
 /* highlight available FN keys when the layer is active */
-/*void rgb_matrix_indicators_user(void) {
+#ifdef RGB_MATRIX_FN_LAYER_HIGHLIGHT
+void rgb_matrix_indicators_user(void) {
   if (layer_state_is(FN)) {
+    rgb_matrix_set_flags(LED_FLAG_NONE);
     for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
       for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
         uint8_t index = g_led_config.matrix_co[row][col];
         if (index != NO_LED) {
-          //g_led_config.flags[index] |= LED_FLAG_KEYLIGHT;
           if (keymap_key_to_keycode(FN, (keypos_t){col,row}) > _______) {
-            uint8_t color = (rgb_matrix_config.hsv.v * 0xff) / 255;
+            uint8_t color = rgb_matrix_config.hsv.v;
             rgb_matrix_set_color(index, color, color, color);
           }
           else {
@@ -163,4 +163,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     }
   }
-}*/
+  else {
+    rgb_matrix_set_flags(LED_FLAG_ALL);
+  }
+}
+#endif

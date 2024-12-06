@@ -59,6 +59,7 @@
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 
 #define ENABLE_RGB_MATRIX_GRADIENT_LEFT_RIGHT
+#define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
 #define ENABLE_RGB_MATRIX_RAINDROPS
 #define ENABLE_RGB_MATRIX_HUE_WAVE
 #define ENABLE_RGB_MATRIX_PIXEL_RAIN
@@ -67,10 +68,16 @@
 #define ENABLE_RGB_MATRIX_DIGITAL_RAIN
 
 /* legacy config */
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255
 #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_CUSTOM_SOLID_WHITE
-#define RGB_MATRIX_STARTUP_HUE 0 
+#define RGB_MATRIX_STARTUP_HUE 0
 #define RGB_MATRIX_STARTUP_SAT 255
 #define RGB_MATRIX_STARTUP_VAL 127 //RGB_MATRIX_MAXIMUM_BRIGHTNESS/2
 
-//#define RGB_MATRIX_SLEEP // turn off effects when suspended
-#define RGB_DISABLE_WHEN_USB_SUSPENDED true
+//#define RGB_DISABLE_WHEN_USB_SUSPENDED true // this makes the keyboard unresponsive after OS boot
+//#define WAIT_FOR_USB
+#define NO_USB_STARTUP_CHECK = yes
+
+/* https://github.com/qmk/qmk_firmware/issues/23255
+// possible issue
+*/
