@@ -38,7 +38,7 @@
 #define DIP_SWITCH_PINS { D6, D5 }
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 0
+#define DEBOUNCE 2
 
 // polling rate
 #define USB_POLLING_INTERVAL_MS 1
@@ -74,9 +74,12 @@
 #define RGB_MATRIX_STARTUP_SAT 255
 #define RGB_MATRIX_STARTUP_VAL 127 //RGB_MATRIX_MAXIMUM_BRIGHTNESS/2
 
-//#define RGB_DISABLE_WHEN_USB_SUSPENDED true // this makes the keyboard unresponsive after OS boot
-//#define WAIT_FOR_USB
-#define NO_USB_STARTUP_CHECK = yes
+#define RGB_MATRIX_FN_LAYER_HIGHLIGHT
+
+//#define RGB_DISABLE_WHEN_USB_SUSPENDED true
+//#define USB_SUSPEND_WAKEUP_DELAY 1000
+//#define WAIT_FOR_USB // defined in rules.mk
+//#define NO_USB_STARTUP_CHECK = yes
 
 /* https://github.com/qmk/qmk_firmware/issues/23255
 // possible issue

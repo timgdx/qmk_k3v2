@@ -1,11 +1,11 @@
 # Keychron K3v2 RGB Optical ISO (SN32F248B)
 Custom [SonixQMK](https://sonixqmk.github.io//SonixDocs/) firmware for Keychron K3v2 RGB Optical ISO based off of [`keyboards/keychron/k3`](https://github.com/SonixQMK/qmk_firmware/tree/sn32_master/keyboards/keychron/k3).<br>
-As with any SonixQMK firmware, bluetooth is NOT supported.
+Bluetooth is NOT supported.
 
 Features:
 - [VIA](https://usevia.app/) support
 - 1000Hz polling rate
-- 0ms debounce
+- 2ms debounce
 - Layer with lighting key disabled
 
 ## Lighting key
@@ -14,14 +14,16 @@ Mac/iOS specific actions are not supported.
 
 ## FN Keymap
 F1-F12 are the same as stock.
->__FN+Esc__: Boot mode<br>
+>__FN+Esc__: Boot mode (for easy flash)<br>
 __FN+Light__: Toggle backlight<br>
 __FN+PageUp__: Set backlight to white<br>
 __FN+Right/Left__: Increase/decrease hue<br>
 __FN+Up/Down__: Increase/decrease saturation<br>
 __FN+Home/End__: Increase/decrease animation speed<br>
 __FN+R__: Reset RGB changes<br>
-__FN+PrntScr__: Windows snippet tool
+__FN+PrntScr__: Windows snippet tool<br>
+__FN+[__: Alt+7<br>
+__FN+]__: Alt+0
 
 
 # Flashing

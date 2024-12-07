@@ -27,6 +27,8 @@ enum layer_names {
 enum custom_keycodes {
     KC_RGB_RST = SAFE_RANGE,  // reset rgb matrix values
     KC_RGB_W,                 // solid white rgb mode
+    KC_LEFT_CB,               // ALT (KC_7)
+    KC_RIGHT_CB,              // ALT (KC_0)
 };
 
 #define KC_TASK LGUI(KC_TAB)        // Task viewer
@@ -52,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
   [FIRST_BASE] = LAYOUT_75_iso(
   /*  0          1          2          3        4        5        6         7        8        9          10          11          12         13         14         15        */
-      KC_ESC,    KC_F1,     KC_F2,     KC_F3,   KC_F4,   KC_F5,   KC_F6,    KC_F7,   KC_F8,   KC_F9,     KC_F10,     KC_F11,     KC_F12,    KC_PSCR,   KC_DEL,    _______   ,
+      KC_ESC,    KC_F1,     KC_F2,     KC_F3,   KC_F4,   KC_F5,   KC_F6,    KC_F7,   KC_F8,   KC_F9,     KC_F10,     KC_F11,     KC_F12,    KC_PSCR,   KC_DEL,    XXXXXXX   ,
       KC_GRV,    KC_1,      KC_2,      KC_3,    KC_4,    KC_5,    KC_6,     KC_7,    KC_8,    KC_9,      KC_0,       KC_MINS,    KC_EQL,    KC_BSPC,              KC_PGUP   ,
       KC_TAB,    KC_Q,      KC_W,      KC_E,    KC_R,    KC_T,    KC_Y,     KC_U,    KC_I,    KC_O,      KC_P,       KC_LBRC,    KC_RBRC,                         KC_PGDN   ,
       KC_CAPS,   KC_A,      KC_S,      KC_D,    KC_F,    KC_G,    KC_H,     KC_J,    KC_K,    KC_L,      KC_SCLN,    KC_QUOT,    KC_NUHS,   KC_ENT,               KC_HOME   ,
@@ -90,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     +------------------------------------------------------------------------------+
     |    |    |    |    |    |   |   |   |   |   |    |    |    |        |RGB_WHITE|
     +------------------------------------------------------------------------------+
-    |      |   |   |   |KC_RGB_RST|    |    |    |    |    |    |    |    |    |   |
+    |      |   |   |   |KC_RGB_RST|   |   |   |   |   |ALT(KC_7)|ALT(KC_0)|  |  |  |
     +-------------------------------------------------------------------      -----+
     |       |    |    |    |    |    |    |    |    |    |    |    |    |     |RSPI|
     +------------------------------------------------------------------------------+
@@ -102,11 +104,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [FN] = LAYOUT_75_iso(
   /*  0           1           2           3           4           5           6           7           8           9           10          11          12          13          14          15         */
       RESET,      KC_BRID,    KC_BRIU,    KC_TASK,    KC_FLXP,    RGB_VAD,    RGB_VAI,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MUTE,    KC_VOLD,    KC_VOLU,    KC_SNIP,    KC_INS,     RGB_TOG    ,
-      _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                KC_RGB_W   ,
-      _______,    _______,    _______,    _______,    KC_RGB_RST, _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                            _______    ,
-      _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                RGB_SPI    ,
-      _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                _______,    RGB_SAI,    RGB_SPD    ,
-      _______,    _______,    _______,                                        _______,                                        _______,    _______,    _______,    RGB_HUD,    RGB_SAD,    RGB_HUI
+      XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                KC_RGB_W   ,
+      XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_RGB_RST, XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_LEFT_CB, KC_RIGHT_CB,                        XXXXXXX    ,
+      XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                RGB_SPI    ,
+      XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,    RGB_SAI,    RGB_SPD    ,
+      XXXXXXX,    XXXXXXX,    XXXXXXX,                                        XXXXXXX,                                        XXXXXXX,    XXXXXXX,    XXXXXXX,    RGB_HUD,    RGB_SAD,    RGB_HUI
   ),
 };
 
@@ -139,20 +141,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 rgb_matrix_mode(RGB_MATRIX_CUSTOM_SOLID_WHITE);
             }
             return false;
+        case KC_LEFT_CB: // {
+            if (record->event.pressed) {
+                tap_code16(ALGR(KC_7));
+            }
+            return false;
+        case KC_RIGHT_CB: // }
+            if (record->event.pressed) {
+                tap_code16(ALGR(KC_0));
+            }
+            return false;
     }
     return true;
 }
 
-/* highlight available FN keys when the layer is active */
+/* highlight available FN keys when the layer is active (RGB_MATRIX_CUSTOM_SOLID_WHITE only)*/
 #ifdef RGB_MATRIX_FN_LAYER_HIGHLIGHT
 void rgb_matrix_indicators_user(void) {
   if (layer_state_is(FN)) {
+    if (rgb_matrix_get_mode() != RGB_MATRIX_CUSTOM_SOLID_WHITE) return;
     rgb_matrix_set_flags(LED_FLAG_NONE);
     for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
       for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
         uint8_t index = g_led_config.matrix_co[row][col];
         if (index != NO_LED) {
-          if (keymap_key_to_keycode(FN, (keypos_t){col,row}) > _______) {
+          if (keymap_key_to_keycode(FN, (keypos_t){col,row}) > XXXXXXX) {
             uint8_t color = rgb_matrix_config.hsv.v;
             rgb_matrix_set_color(index, color, color, color);
           }
